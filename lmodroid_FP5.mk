@@ -11,14 +11,14 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/fairphone/FP5/device.mk)
 
 # Inherit some common Lineage stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+$(call inherit-product, vendor/lmodroid/config/common_full_phone.mk)
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2700
 TARGET_SCREEN_WIDTH := 1224
 
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := lineage_FP5
+PRODUCT_NAME := lmodroid_FP5
 PRODUCT_DEVICE := FP5
 PRODUCT_BRAND := Fairphone
 PRODUCT_MODEL := FP5
