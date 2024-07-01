@@ -3,6 +3,9 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Add common definitions for Qualcomm
+$(call inherit-product, hardware/qcom-caf/common/common.mk)
+
 # A/B
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
 
@@ -40,6 +43,7 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audio_amplifier.lahaina \
     audioadsprpcd \
+    firmware_aw_cali.bin_symlink \
     liba2dpoffload \
     libbatterylistener \
     libcirrusspkrprot \
@@ -91,8 +95,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml
 
 # Board API level
-BOARD_API_LEVEL := 30
-BOARD_SHIPPING_API_LEVEL := $(BOARD_API_LEVEL)
+BOARD_SHIPPING_API_LEVEL := 30
 
 # Boot control
 PRODUCT_PACKAGES += \
@@ -238,6 +241,9 @@ PRODUCT_PACKAGES += \
     ipacm \
     IPACM_cfg.xml
 
+# Kernel
+PRODUCT_ENABLE_UFFD_GC := false
+
 # Keymaster
 PRODUCT_PACKAGES += \
     android.hardware.hardware_keystore.km41.xml \
@@ -342,10 +348,13 @@ PRODUCT_PACKAGES += \
     android.hardware.radio@1.5.vendor:64 \
     android.hardware.radio.config@1.2.vendor:64 \
     android.hardware.radio.deprecated@1.0.vendor:64 \
+    libcurl.vendor:64 \
     libjson:64 \
+    libjsoncpp.vendor \
     libprotobuf-cpp-full-3.9.1-vendorcompat \
     libprotobuf-cpp-lite-3.9.1-vendorcompat \
-    librmnetctl:64
+    librmnetctl:64 \
+    libsqlite.vendor:64
 
 # Sensors
 PRODUCT_PACKAGES += \
@@ -370,6 +379,10 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Storage
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+
+# Tctd
+PRODUCT_PACKAGES += \
+    libsysutils.vendor:32
 
 # Telephony
 PRODUCT_PACKAGES += \
@@ -454,10 +467,15 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.ipsec_tunnels.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnels.xml
 
+# WiFi firmware symlink
+PRODUCT_PACKAGES += \
+    firmware_WCNSS_qcom_cfg.ini_symlink
+
 # WiFi Display
 PRODUCT_PACKAGES += \
     android.media.audio.common.types-V2-cpp \
     libnl \
+    libpng.vendor:32 \
     libwfdaac_vendor:32
 
 PRODUCT_BOOT_JARS += \
